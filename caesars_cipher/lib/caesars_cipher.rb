@@ -1,11 +1,14 @@
 def caesars_cipher(string, shift)
 	caps = ("A".."Z").to_a
 	lowers = ("a".."z").to_a
+	shift = shift%26 if shift >= 26
 	new_str = string.gsub(/./) do |x| 
 		if caps.include?(x)
-			x = ((caps.index(x) + shift) >= caps.size)? caps[caps.index(x) + shift - caps.size] : caps[caps.index(x) + shift]
+		    shift_value = caps.index(x) + shift
+			x = (shift_value >= 26)? caps[shift_value - 26] : caps[shift_value]
 		elsif lowers.include?(x)
-            x = ((lowers.index(x) + shift) >= lowers.size)? lowers[lowers.index(x) + shift - lowers.size]: lowers[lowers.index(x) + shift]
+		    shift_value = lowers.index(x) + shift
+            x = (shift_value >= 26)? lowers[shift_value - 26]: lowers[shift_value]
 		else
 		    x = x
 		end

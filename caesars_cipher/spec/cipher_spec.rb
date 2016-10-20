@@ -13,4 +13,7 @@ describe ".caesar_cipher" do
     context "reverts to A/a when going past Z/z" do
         it { expect(caesars_cipher("z Z", 1)).to eql("a A") }
     end
+    context "shifts by a big key" do
+        it { expect(caesars_cipher("hello", 260)).to eql("hello") }
+    end
 end
