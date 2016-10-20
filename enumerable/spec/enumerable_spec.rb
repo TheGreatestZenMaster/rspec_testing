@@ -13,6 +13,10 @@ describe "Enumerable" do
             it { expect([nil, nil, nil].my_count).to eql(3) }
         end
         
+        context "when array is empty" do
+            it { expect([].my_count).to eql(0) }
+        end
+        
         context "when passed nonenumerable objects" do
             it { expect{nil.my_count}.to raise_error(NoMethodError) }
             it { expect{99.my_count}.to raise_error(NoMethodError) }
