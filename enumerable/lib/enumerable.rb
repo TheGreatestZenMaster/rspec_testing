@@ -17,9 +17,11 @@ module Enumerable
 	
 	def my_select
 		result = []
-		self.my_each do |x| 
-			if yield(x) == true
+		if block_given?
+			self.my_each do |x| 
+				if yield(x) == true
 				result << x
+				end
 			end
 		end
 		return result
