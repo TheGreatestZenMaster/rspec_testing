@@ -7,7 +7,7 @@ describe "Enumerable" do
         it "returns a number" do
             expect(ary.my_count).to be_instance_of(Fixnum)
         end
-        it "returns 5" do
+        it "returns a count" do
             expect(ary.my_count).to eql(5)
         end
         context "non enumerable objects" do

@@ -59,7 +59,9 @@ module Enumerable
 
 	def my_count
 		count = 0
-		self.my_each{|x| count += 1}
+		self.my_each do |x| 
+		    block_given?? (count += 1 if yield(x)): count += 1
+		end
 		return count
 	end
 
