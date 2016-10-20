@@ -1,3 +1,17 @@
+class RunningWeek
+    attr_reader :week, :runs
+    
+    def intialize(week, runs)
+        @week = week
+        @runs = runs
+    end
+    
+    def runs(week, runs)
+        @runs
+    end
+    
+end
+
 class Run
     attr_reader :duration, :distance, :timestamp, :count
     @@count = 0
