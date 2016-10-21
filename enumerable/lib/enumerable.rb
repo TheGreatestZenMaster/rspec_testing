@@ -17,9 +17,7 @@ module Enumerable
 	
 	def my_select
 		result = []
-		if block_given?
-			self.my_each {|x| result << x if yield(x) == true}
-		end
+		self.my_each {|x| result << x if yield(x) == true} if block_given?
 		result
 	end
 
@@ -38,7 +36,7 @@ module Enumerable
 				result = false
 			end
 		end
-		return result
+		result
 	end
 
 	def my_none?
@@ -48,7 +46,7 @@ module Enumerable
 				result = false
 			end
 		end
-		return result
+		result
 	end
 
 	def my_count
@@ -59,18 +57,14 @@ module Enumerable
 
 	def my_map(&block)
 		result = []
-		self.my_each do |x| 
-			result << block.call(x)
-		end
-		return result
+		self.my_each {|x| result << block.call(x)} if block_given?
+		result
 	end
 
 	def my_inject(value)
 		result = 0
-		self.my_each do |x|
-			result += yield(value, x)
-		end
-		return result
+		self.my_each { |x| result += yield(value, x) }
+		result
 	end
 end
 =begin
