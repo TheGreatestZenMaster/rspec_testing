@@ -18,23 +18,15 @@ module Enumerable
 	def my_select
 		result = []
 		if block_given?
-			self.my_each do |x| 
-				if yield(x) == true
-				result << x
-				end
-			end
+			self.my_each {|x| result << x if yield(x) == true}
 		end
-		return result
+		result
 	end
 
 	def my_any?
 		result = false
-		self.my_each do |x|
-			if yield(x)
-				result = true
-			end
-		end
-		return result
+		self.my_each {|x| result = true if yield(x)}
+		result
 	end
 
 	def my_all?
