@@ -15,4 +15,12 @@ class GameBoard
             return row
         end
     end
+    
+    def update(column, value)
+        6.times do |row|
+            next unless @board[column][row].is_a?(Symbol)
+            @board[column][row] = value
+            break
+        end
+    end
 end
