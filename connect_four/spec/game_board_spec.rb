@@ -1,44 +1,27 @@
 require 'game_board'
+require 'player'
 
 describe "GameBoard" do
+    let(:player) { Player.new("Jake") }
     let(:game)  { GameBoard.new } 
     let(:game_inplay)  {GameBoard.new}
-    let(:board) {[[:zero,:one,:two,:thre,:four,:five],[:zero,:one,:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five],[:zero,:one,:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five],[:zero,:one,:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five]] }
+    let(:board) {   [  [:zero,:zero,:zero,:zero,:zero,:zero,:zero],[:one,:one,:one,:one,:one,:one,:one],[:two,:two,:two,:two,:two,:two,:two],
+                    [:three,:three,:three,:three,:three,:three,:three],[:four,:four,:four,:four,:four,:four,:four],[:five,:five,:five,:five,:five,:five,:five]] }
                         
-    let(:board_inplay) {[["O","O","X",:thre,:four,:five],["X",:one,:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five],["O",:one,:two,:thre,:four,:five],
-                        ["X",:one,:two,:thre,:four,:five],["X","O",:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five]] }
-
+    let(:board_inplay){[["\u2611","\u2611","\u2612",:zero,:zero,:zero,:zero],["\u2612",:one,:one,:one,:one,:one,:one],
+                        [:two,:two,:two,:two,:two,:two,:two],["\u2611",:three,:three,:three,:three,:three,:three],
+                        ["\u2612",:four,:four,:four,:four,:four,:four],["\u2612","\u2611",:five,:five,:five,:five,:five]] }
     context "intialize" do
         it { expect(game.board).to eql(board) }
     end
     
     context "#drop_piece" do
-        it { expect(game.drop_piece(4)).to eql(board[4][0]) }
         before do
-            game_inplay.board = board_inplay
-        end
-        it { expect(game_inplay.drop_piece(4)).to eql(board_inplay[4][1]) }
-        it "works as an instance double test" do
-            test_game = instance_double("GameBoard", :board => [["O","O","X",:thre,:four,:five],["X",:one,:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five],["O",:one,:two,:thre,:four,:five],
-                        ["X",:one,:two,:thre,:four,:five],["X","O",:two,:thre,:four,:five],
-                        [:zero,:one,:two,:thre,:four,:five]])
-            expect(test_game.board).to eql(board_inplay)
-        end
-    end
-    
-    context "updates board" do
-        before do
-            game.update(4, "X")
+            game.drop_piece(4, player)
         end
         it "updates board" do
-            expect(game.board[4][0]).to eql("X")
-            expect(game.board[4][1]).to eql(:one)
+            expect(game.board[5][3]).to eql(player.symbol)
+            expect(game.board[4][1]).to eql(:four)
         end
     end
 end
