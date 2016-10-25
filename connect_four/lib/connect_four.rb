@@ -4,17 +4,17 @@ load "player.rb"
 class Connect_Four
     attr_accessor :player, :player2, :board, :turn
     def initialize
-        @board = GameBoard.new
         @player1 = Player.new("Jake")
         @turn = @player1
         @player2 = Player.new("Bob")
+        @board = GameBoard.new
         play
     end 
     
     def play
         continue = true
         while continue
-         @board.turn = @turn
+            @board.turn = @turn
             move = @turn.get_choice
             if move == "exit"
                 puts "Thanks for playing! See you next time!"
