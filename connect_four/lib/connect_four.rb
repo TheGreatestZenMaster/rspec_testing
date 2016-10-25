@@ -20,7 +20,10 @@ class Connect_Four
                 puts "Thanks for playing! See you next time!"
                 continue = false
             else
-                @board.drop_piece(move)
+                while @board.drop_piece(move)
+                    puts "That row is full!"
+                    move = @turn.get_choice
+                end
                 @board.display
                 if @board.check_for_victory(@turn)
                     puts "Congrats #{@turn.name}! You won!"

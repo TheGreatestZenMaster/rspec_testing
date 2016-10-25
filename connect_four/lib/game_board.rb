@@ -55,11 +55,14 @@ class GameBoard
     end
     
     def drop_piece(column)
+        overflow = true
         5.downto(0) do |row|
             next unless @board[row][column-1].is_a?(Symbol)
             @board[row][column-1] = @turn.symbol
+            overflow = false
             break
         end
+        overflow
     end
     
     def check_for_victory(player)
@@ -67,9 +70,7 @@ class GameBoard
         victories.each do |sub_array|
             count = 0
             sub_array.each do |pos|
-                if @board[pos[1]][pos[0]] == player.symbol 
-                    count += 1
-                end
+                count += 1 if @board[pos[1]][pos[0]] == player.symbol 
                 victory = true if count == 4
             end
             next if victory == true
@@ -77,114 +78,3 @@ class GameBoard
         victory
     end
 end
-       
-=begin
-    def check_for_victory(player)
-        start = Node.new([1,1], 0)
-        queue = Array.new
-        queue << start
-        victory = false
-        nodes_visited = Array.new
-        until queue.empty? || victory
-            current_node = queue.shift
-            nodes_visited << current_node.value
-            if @board[current_node.value[1]-1][current_node.value[0]-1] == player.symbol
-                next if 
-                current_node.count += 1
-                victory = true if current_node.count == 4
-            else
-                current_node.count = 0
-            end
-            current_node.children.each do |child_value|
-                next if 
-                child = Node.new(child_value, current_node.count)
-                queue << child
-            end
-        end
-        victory
-    end
-end
-
-class Node
-    attr_accessor :value, :children, :count
-    def initialize(value, count=0)
-        @count = count
-        @value = value
-        @children = Array.new
-        find_children
-    end
-    
-    def find_children
-         right_diag_edges
-         left_diag_edges
-         top_edges
-         right_edges
-    end
- 
-    def right_edges
-         zero_plus_one = @value[0] + 1
- 
-        if zero_plus_one <= 7
-            @children << [zero_plus_one, @value[1]]
-        end
-    end
-     
-    def right_diag_edges
-        zero_plus_one = @value[0] + 1
-        one_plus_one = @value[1] + 1
- 
-         
-        if zero_plus_one <= 7
-            if one_plus_one <= 6
-                 @children << [zero_plus_one, one_plus_one]
-            end
-        end
-    end
-    
-     def top_edges
-         one_plus_one = @value[1] + 1
- 
-         if one_plus_one <= 6
-             @children << [@value[0], one_plus_one]
-         end
-     end
-    
-    def left_diag_edges
-         zero_plus_one = @value[0] + 1
-         one_minus_one = @value[1] - 1
- 
-         
-        if one_minus_one >= 1
-            if zero_plus_one <= 7
-                 @children << [zero_plus_one, one_minus_one]
-            end
-        end
-    end
-end
- 
-    def find_children
-        zero_plus_one = @value[0] + 1
-        one_plus_one = @value[1] + 1
-        one_minus_one = @value[1] - 1
-        
-
-        if zero_plus_one <= 7
-            #right edge
-            @children << [zero_plus_one, @value[1]]
-            #right diag
-            @children << [zero_plus_one, one_plus_one] if one_plus_one <= 6
-            #left diag
-            @children << [@value[0], one_minus_one] if one_minus_one >= 1
-        end
-        #vert
-        @children << [@value[0], one_plus_one] if one_plus_one <= 6
-        
-    end
-end
-
-=end
-
-
-                            
-
-     
