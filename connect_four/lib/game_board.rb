@@ -21,16 +21,10 @@ class GameBoard
 
     def display
         display = "Connect Four\n"
+        code = "\u2610"
         @board.each do |sub_array|
            rowline = "|"
-           sub_array.each do |row|
-               if row.is_a?(Symbol)
-                   code = "\u2610"
-                   rowline << "#{code.encode('utf-8')}|"
-               else
-                   rowline << "#{row.encode('utf-8')}|"
-               end
-           end
+           sub_array.each { |row| row.is_a?(Symbol)? rowline << "#{code.encode('utf-8')}|": rowline << "#{row.encode('utf-8')}|"}
            display << rowline + "\n"
         end
         display.split("\n").each {|line| puts (line.encode('utf-8')).center(50)}
