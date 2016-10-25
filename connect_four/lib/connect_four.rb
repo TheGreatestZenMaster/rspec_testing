@@ -22,7 +22,7 @@ class Connect_Four
             else
                 @board.drop_piece(move)
                 @board.display
-                if @board.check_for_victory
+                if @board.check_for_victory(@turn)
                     puts "Congrats #{@turn.name}! You won!"
                     continue = false
                 else
