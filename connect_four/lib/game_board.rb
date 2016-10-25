@@ -1,7 +1,7 @@
 class GameBoard
     attr_accessor :board, :display, :slots, :turn
     
-    def initialize
+    def initialize(first_player)
         @board = [  [:zero,:one,:two,:three,:four,:five,:six],
                     [:zero,:one,:two,:three,:four,:five,:six],
                     [:zero,:one,:two,:three,:four,:five,:six],
@@ -9,7 +9,7 @@ class GameBoard
                     [:zero,:one,:two,:three,:four,:five,:six],
                     [:zero,:one,:two,:three,:four,:five,:six]]
         @display = display
-        @turn = nil
+        @turn = first_player
         build_board
     end
     def build_board

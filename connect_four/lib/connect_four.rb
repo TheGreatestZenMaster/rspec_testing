@@ -7,7 +7,7 @@ class Connect_Four
         @player1 = Player.new("Jake")
         @turn = @player1
         @player2 = Player.new("Bob")
-        @board = GameBoard.new
+        @board = GameBoard.new(@player)
         play
     end 
     
